@@ -28,6 +28,7 @@ euvox-metrics = { workspace = true }
 euvox-client-protocol = { workspace = true }
 euvox-artifact-store = { workspace = true }
 euvox-control-api = { workspace = true }
+euvox-simulation-client = { workspace = true }
 
 [dependency-groups]
 dev = [
@@ -40,6 +41,7 @@ dev = [
     "aiosqlite>=0.20",
     "sqlalchemy-utils>=0.41",
     "euvox-control-api",
+    "euvox-simulation-client",
 ]
 
 [tool.ruff]

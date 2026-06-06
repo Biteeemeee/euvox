@@ -317,6 +317,7 @@ dependencies = [
 dev = [
     { name = "aiosqlite" },
     { name = "euvox-control-api" },
+    { name = "euvox-simulation-client" },
     { name = "httpx" },
     { name = "mypy" },
     { name = "pre-commit" },
@@ -343,6 +344,7 @@ requires-dist = [
 dev = [
     { name = "aiosqlite", specifier = ">=0.20" },
     { name = "euvox-control-api", editable = "apps/control_api" },
+    { name = "euvox-simulation-client", editable = "apps/simulation_client" },
     { name = "httpx", specifier = ">=0.27" },
     { name = "mypy", specifier = ">=1.13" },
     { name = "pre-commit", specifier = ">=4.0" },
@@ -629,8 +631,7 @@ version = "0.1.0"
 source = { editable = "apps/simulation_client" }
 dependencies = [
     { name = "aiofiles" },
-    { name = "euvox-client-protocol" },
-    { name = "euvox-core" },
+    { name = "euvox-common-schemas" },
     { name = "httpx" },
     { name = "pydantic-settings" },
     { name = "structlog" },
@@ -639,8 +640,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "aiofiles", specifier = ">=24.1" },
-    { name = "euvox-client-protocol", editable = "packages/client_protocol" },
-    { name = "euvox-core", editable = "packages/core" },
+    { name = "euvox-common-schemas", editable = "packages/common_schemas" },
     { name = "httpx", specifier = ">=0.27" },
     { name = "pydantic-settings", specifier = ">=2.6" },
     { name = "structlog", specifier = ">=24.4" },

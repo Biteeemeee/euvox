@@ -11,6 +11,13 @@ from control_api.schemas import CompleteRunRequest, CreateRunRequest
 router = APIRouter(prefix="/runs", tags=["runs"])
 
 
+@router.get("", response_model=list[RunDTO])
+async def list_runs(session: SessionDep, job_id: str | None = None) -> list[RunDTO]:
+    repo = RunRepository(session)
+    runs = await repo.list_by_job(job_id) if job_id else []
+    return [RunDTO.model_validate(r) for r in runs]
+
+
 @router.post("", status_code=201, response_model=RunDTO)
 async def create_run(body: CreateRunRequest, session: SessionDep) -> RunDTO:
     run = Run(
