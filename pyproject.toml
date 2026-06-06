@@ -1,0 +1,56 @@
+[project]
+name = "euvox"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "euvox-core",
+    "euvox-common-schemas",
+    "euvox-operation-registry",
+    "euvox-search-space",
+    "euvox-mod-rendering",
+    "euvox-eu5-parser",
+    "euvox-metrics",
+    "euvox-client-protocol",
+    "euvox-artifact-store",
+]
+
+[tool.uv.workspace]
+members = ["packages/*", "apps/*"]
+
+[tool.uv.sources]
+euvox-core = { workspace = true }
+euvox-common-schemas = { workspace = true }
+euvox-operation-registry = { workspace = true }
+euvox-search-space = { workspace = true }
+euvox-mod-rendering = { workspace = true }
+euvox-eu5-parser = { workspace = true }
+euvox-metrics = { workspace = true }
+euvox-client-protocol = { workspace = true }
+euvox-artifact-store = { workspace = true }
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3",
+    "pytest-asyncio>=0.24",
+    "httpx>=0.27",
+    "ruff>=0.9",
+    "mypy>=1.13",
+    "pre-commit>=4.0",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+namespace_packages = true
+explicit_package_bases = true
