@@ -27,6 +27,7 @@ euvox-eu5-parser = { workspace = true }
 euvox-metrics = { workspace = true }
 euvox-client-protocol = { workspace = true }
 euvox-artifact-store = { workspace = true }
+euvox-control-api = { workspace = true }
 
 [dependency-groups]
 dev = [
@@ -36,6 +37,9 @@ dev = [
     "ruff>=0.9",
     "mypy>=1.13",
     "pre-commit>=4.0",
+    "aiosqlite>=0.20",
+    "sqlalchemy-utils>=0.41",
+    "euvox-control-api",
 ]
 
 [tool.ruff]
