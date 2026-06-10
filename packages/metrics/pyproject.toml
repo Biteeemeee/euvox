@@ -3,8 +3,7 @@ name = "euvox-metrics"
 version = "0.1.0"
 requires-python = ">=3.12"
 dependencies = [
-    "pydantic>=2.0",
-    "euvox-common-schemas",
+    "euvox-eu5-parser",
 ]
 
 [build-system]

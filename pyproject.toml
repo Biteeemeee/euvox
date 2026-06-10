@@ -30,6 +30,8 @@ euvox-artifact-store = { workspace = true }
 euvox-control-api = { workspace = true }
 euvox-simulation-client = { workspace = true }
 euvox-mod-builder-service = { workspace = true }
+euvox-evaluation-service = { workspace = true }
+euvox-optimizer-service = { workspace = true }
 
 [dependency-groups]
 dev = [
@@ -44,6 +46,8 @@ dev = [
     "euvox-control-api",
     "euvox-simulation-client",
     "euvox-mod-builder-service",
+    "euvox-evaluation-service",
+    "euvox-optimizer-service",
 ]
 
 [tool.ruff]

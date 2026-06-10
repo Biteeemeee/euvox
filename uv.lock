@@ -418,7 +418,9 @@ dependencies = [
 dev = [
     { name = "aiosqlite" },
     { name = "euvox-control-api" },
+    { name = "euvox-evaluation-service" },
     { name = "euvox-mod-builder-service" },
+    { name = "euvox-optimizer-service" },
     { name = "euvox-simulation-client" },
     { name = "httpx" },
     { name = "mypy" },
@@ -446,7 +448,9 @@ requires-dist = [
 dev = [
     { name = "aiosqlite", specifier = ">=0.20" },
     { name = "euvox-control-api", editable = "apps/control_api" },
+    { name = "euvox-evaluation-service", editable = "apps/evaluation_service" },
     { name = "euvox-mod-builder-service", editable = "apps/mod_builder_service" },
+    { name = "euvox-optimizer-service", editable = "apps/optimizer_service" },
     { name = "euvox-simulation-client", editable = "apps/simulation_client" },
     { name = "httpx", specifier = ">=0.27" },
     { name = "mypy", specifier = ">=1.13" },
@@ -576,8 +580,8 @@ version = "0.1.0"
 source = { editable = "apps/evaluation_service" }
 dependencies = [
     { name = "celery" },
-    { name = "euvox-common-schemas" },
     { name = "euvox-core" },
+    { name = "euvox-eu5-parser" },
     { name = "euvox-metrics" },
     { name = "pydantic-settings" },
     { name = "structlog" },
@@ -586,8 +590,8 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "celery", specifier = ">=5.4" },
-    { name = "euvox-common-schemas", editable = "packages/common_schemas" },
     { name = "euvox-core", editable = "packages/core" },
+    { name = "euvox-eu5-parser", editable = "packages/eu5_parser" },
     { name = "euvox-metrics", editable = "packages/metrics" },
     { name = "pydantic-settings", specifier = ">=2.6" },
     { name = "structlog", specifier = ">=24.4" },
@@ -598,15 +602,11 @@ name = "euvox-metrics"
 version = "0.1.0"
 source = { editable = "packages/metrics" }
 dependencies = [
-    { name = "euvox-common-schemas" },
-    { name = "pydantic" },
+    { name = "euvox-eu5-parser" },
 ]
 
 [package.metadata]
-requires-dist = [
-    { name = "euvox-common-schemas", editable = "packages/common_schemas" },
-    { name = "pydantic", specifier = ">=2.0" },
-]
+requires-dist = [{ name = "euvox-eu5-parser", editable = "packages/eu5_parser" }]
 
 [[package]]
 name = "euvox-mod-builder-service"
