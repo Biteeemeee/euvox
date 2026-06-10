@@ -29,6 +29,7 @@ euvox-client-protocol = { workspace = true }
 euvox-artifact-store = { workspace = true }
 euvox-control-api = { workspace = true }
 euvox-simulation-client = { workspace = true }
+euvox-mod-builder-service = { workspace = true }
 
 [dependency-groups]
 dev = [
@@ -42,6 +43,7 @@ dev = [
     "sqlalchemy-utils>=0.41",
     "euvox-control-api",
     "euvox-simulation-client",
+    "euvox-mod-builder-service",
 ]
 
 [tool.ruff]

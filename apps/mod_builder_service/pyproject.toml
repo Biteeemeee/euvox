@@ -4,9 +4,9 @@ version = "0.1.0"
 requires-python = ">=3.12"
 dependencies = [
     "euvox-core",
-    "euvox-common-schemas",
     "euvox-operation-registry",
     "euvox-mod-rendering",
+    "euvox-artifact-store",
     "celery>=5.4",
     "aiofiles>=24.1",
     "structlog>=24.4",

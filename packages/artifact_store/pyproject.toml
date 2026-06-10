@@ -3,7 +3,7 @@ name = "euvox-artifact-store"
 version = "0.1.0"
 requires-python = ">=3.12"
 dependencies = [
-    "euvox-common-schemas",
+    "minio>=7.2",
 ]
 
 [build-system]
