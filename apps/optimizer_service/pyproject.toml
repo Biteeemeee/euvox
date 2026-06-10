@@ -6,6 +6,7 @@ dependencies = [
     "euvox-core",
     "euvox-common-schemas",
     "euvox-search-space",
+    "euvox-surrogate",
     "celery>=5.4",
     "structlog>=24.4",
     "pydantic-settings>=2.6",

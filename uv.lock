@@ -26,6 +26,7 @@ members = [
     "euvox-parser-service",
     "euvox-search-space",
     "euvox-simulation-client",
+    "euvox-surrogate",
     "euvox-surrogate-service",
 ]
 
@@ -422,6 +423,8 @@ dev = [
     { name = "euvox-mod-builder-service" },
     { name = "euvox-optimizer-service" },
     { name = "euvox-simulation-client" },
+    { name = "euvox-surrogate" },
+    { name = "euvox-surrogate-service" },
     { name = "httpx" },
     { name = "mypy" },
     { name = "pre-commit" },
@@ -452,6 +455,8 @@ dev = [
     { name = "euvox-mod-builder-service", editable = "apps/mod_builder_service" },
     { name = "euvox-optimizer-service", editable = "apps/optimizer_service" },
     { name = "euvox-simulation-client", editable = "apps/simulation_client" },
+    { name = "euvox-surrogate", editable = "packages/surrogate" },
+    { name = "euvox-surrogate-service", editable = "apps/surrogate_service" },
     { name = "httpx", specifier = ">=0.27" },
     { name = "mypy", specifier = ">=1.13" },
     { name = "pre-commit", specifier = ">=4.0" },
@@ -674,6 +679,7 @@ dependencies = [
     { name = "euvox-common-schemas" },
     { name = "euvox-core" },
     { name = "euvox-search-space" },
+    { name = "euvox-surrogate" },
     { name = "pydantic-settings" },
     { name = "structlog" },
 ]
@@ -684,6 +690,7 @@ requires-dist = [
     { name = "euvox-common-schemas", editable = "packages/common_schemas" },
     { name = "euvox-core", editable = "packages/core" },
     { name = "euvox-search-space", editable = "packages/search_space" },
+    { name = "euvox-surrogate", editable = "packages/surrogate" },
     { name = "pydantic-settings", specifier = ">=2.6" },
     { name = "structlog", specifier = ">=24.4" },
 ]
@@ -750,6 +757,25 @@ requires-dist = [
 ]
 
 [[package]]
+name = "euvox-surrogate"
+version = "0.1.0"
+source = { editable = "packages/surrogate" }
+dependencies = [
+    { name = "euvox-search-space" },
+    { name = "joblib" },
+    { name = "numpy" },
+    { name = "scikit-learn" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "euvox-search-space", editable = "packages/search_space" },
+    { name = "joblib", specifier = ">=1.3" },
+    { name = "numpy", specifier = ">=1.26" },
+    { name = "scikit-learn", specifier = ">=1.5" },
+]
+
+[[package]]
 name = "euvox-surrogate-service"
 version = "0.1.0"
 source = { editable = "apps/surrogate_service" }
@@ -757,8 +783,9 @@ dependencies = [
     { name = "celery" },
     { name = "euvox-common-schemas" },
     { name = "euvox-core" },
+    { name = "euvox-search-space" },
+    { name = "euvox-surrogate" },
     { name = "pydantic-settings" },
-    { name = "scikit-learn" },
     { name = "structlog" },
 ]
 
@@ -767,8 +794,9 @@ requires-dist = [
     { name = "celery", specifier = ">=5.4" },
     { name = "euvox-common-schemas", editable = "packages/common_schemas" },
     { name = "euvox-core", editable = "packages/core" },
+    { name = "euvox-search-space", editable = "packages/search_space" },
+    { name = "euvox-surrogate", editable = "packages/surrogate" },
     { name = "pydantic-settings", specifier = ">=2.6" },
-    { name = "scikit-learn", specifier = ">=1.5" },
     { name = "structlog", specifier = ">=24.4" },
 ]
 

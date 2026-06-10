@@ -31,7 +31,9 @@ euvox-control-api = { workspace = true }
 euvox-simulation-client = { workspace = true }
 euvox-mod-builder-service = { workspace = true }
 euvox-evaluation-service = { workspace = true }
+euvox-surrogate = { workspace = true }
 euvox-optimizer-service = { workspace = true }
+euvox-surrogate-service = { workspace = true }
 
 [dependency-groups]
 dev = [
@@ -48,6 +50,8 @@ dev = [
     "euvox-mod-builder-service",
     "euvox-evaluation-service",
     "euvox-optimizer-service",
+    "euvox-surrogate",
+    "euvox-surrogate-service",
 ]
 
 [tool.ruff]

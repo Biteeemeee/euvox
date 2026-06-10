@@ -1,5 +1,6 @@
 import asyncio
 import random
+from pathlib import Path
 
 import structlog
 from euvox.core.db import make_engine, make_session_factory
@@ -13,7 +14,8 @@ from euvox.core.repositories import (
     SimulationJobRepository,
     SurrogateSampleRepository,
 )
-from euvox.search_space import SearchSpaceDefinition, default_search_space_v1
+from euvox.search_space import default_search_space_v1
+from euvox.surrogate import ExtraTreesSurrogate, FeatureEncoder, SurrogateGuidedOptimizer
 
 from optimizer_service.celery_app import celery_app
 from optimizer_service.config import Settings, get_settings
@@ -22,12 +24,23 @@ from optimizer_service.optimizers import RandomSearchOptimizer, SimpleEvolutiona
 logger = structlog.get_logger()
 
 
-def _pick_optimizer(
-    n_samples: int, threshold: int, space: SearchSpaceDefinition
-) -> RandomSearchOptimizer | SimpleEvolutionaryOptimizer:
-    if n_samples < threshold:
-        return RandomSearchOptimizer()
-    return SimpleEvolutionaryOptimizer()
+def _resolve_optimizer(
+    experiment_id: str,
+    samples: list,
+    settings: Settings,
+) -> SurrogateGuidedOptimizer | SimpleEvolutionaryOptimizer | RandomSearchOptimizer:
+    model_path = Path(settings.surrogate_model_dir) / f"{experiment_id}.joblib"
+    if model_path.exists():
+        space = default_search_space_v1()
+        surrogate = ExtraTreesSurrogate.load(model_path)
+        encoder = FeatureEncoder.from_space(space)
+        logger.info("surrogate_guided_optimizer_selected", experiment_id=experiment_id)
+        return SurrogateGuidedOptimizer(surrogate, encoder)
+
+    if len(samples) >= settings.evolutionary_threshold:
+        return SimpleEvolutionaryOptimizer()
+
+    return RandomSearchOptimizer()
 
 
 @celery_app.task(name="optimizer.generate_candidates", bind=True, max_retries=3)
@@ -64,7 +77,7 @@ async def _generate_candidates_async(
             samples = await sample_repo.list_by_experiment(experiment_id)
 
         space = default_search_space_v1()
-        optimizer = _pick_optimizer(len(samples), settings.evolutionary_threshold, space)
+        optimizer = _resolve_optimizer(experiment_id, samples, settings)
         candidate_vectors = optimizer.suggest(samples, space, n=n_candidates)
 
         for vec in candidate_vectors:
@@ -72,7 +85,11 @@ async def _generate_candidates_async(
                 factory, experiment_id, vec, exp.search_space_version, settings
             )
 
-        log.info("candidates_generated", n=len(candidate_vectors))
+        log.info(
+            "candidates_generated",
+            n=len(candidate_vectors),
+            optimizer=type(optimizer).__name__,
+        )
 
     finally:
         await engine.dispose()
