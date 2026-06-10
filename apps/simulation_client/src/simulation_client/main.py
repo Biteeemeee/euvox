@@ -34,16 +34,15 @@ async def run(settings: Settings | None = None) -> None:
     async with httpx.AsyncClient(base_url=settings.control_api_url, timeout=30.0) as http:
         api = ControlApiClient(http)
 
+        worker = SimulationWorker(api, settings)
         client_dto = await api.register(
             name=settings.client_name,
             client_version=settings.client_version,
             fingerprint=settings.machine_fingerprint,
-            capabilities={"runner": "fake", "platform": "python"},
+            capabilities={"runner": worker.runner_name(), "platform": "python"},
         )
         client_id = client_dto.id
-        logger.info("registered", client_id=client_id)
-
-        worker = SimulationWorker(api, settings)
+        logger.info("registered", client_id=client_id, runner=worker.runner_name())
         heartbeat_task = asyncio.create_task(
             _heartbeat_loop(api, client_id, settings.heartbeat_interval)
         )

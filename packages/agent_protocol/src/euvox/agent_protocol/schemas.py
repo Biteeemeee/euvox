@@ -15,6 +15,20 @@ class EventProposal(BaseModel):
     is_major: bool = False
     proposed_by: str = "optimizer"
 
+    def to_create_event_spec(self) -> dict[str, object]:
+        """Convert a reviewed proposal to a create_event@v1 operation spec dict."""
+        return {
+            "event_id": self.event_id,
+            "title": self.title,
+            "description": self.description,
+            "trigger_conditions": list(self.trigger_conditions),
+            "effects": list(self.effects),
+            "options": [],
+            "picture": "GFX_evt_default",
+            "is_triggered_only": True,
+            "fire_only_once": True,
+        }
+
     def canonical_hash(self) -> str:
         import json as _json
 

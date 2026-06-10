@@ -23,6 +23,13 @@ class Settings(BaseSettings):
     poll_interval: float = 5.0
     heartbeat_interval: float = 30.0
 
+    # EU5 runner settings (leave unset to use the fake runner)
+    eu5_exe_path: Path | None = None
+    eu5_user_dir: Path | None = None
+    eu5_launch_timeout: float = 120.0
+    eu5_run_timeout: float = 3600.0
+    eu5_save_poll_interval: float = 5.0
+
 
 @lru_cache
 def get_settings() -> Settings:
