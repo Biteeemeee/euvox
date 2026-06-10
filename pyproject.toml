@@ -34,6 +34,8 @@ euvox-evaluation-service = { workspace = true }
 euvox-surrogate = { workspace = true }
 euvox-optimizer-service = { workspace = true }
 euvox-surrogate-service = { workspace = true }
+euvox-agent-protocol = { workspace = true }
+euvox-agent-service = { workspace = true }
 
 [dependency-groups]
 dev = [
@@ -52,6 +54,8 @@ dev = [
     "euvox-optimizer-service",
     "euvox-surrogate",
     "euvox-surrogate-service",
+    "euvox-agent-protocol",
+    "euvox-agent-service",
 ]
 
 [tool.ruff]

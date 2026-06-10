@@ -10,6 +10,7 @@ resolution-markers = [
 [manifest]
 members = [
     "euvox",
+    "euvox-agent-protocol",
     "euvox-agent-service",
     "euvox-artifact-store",
     "euvox-client-protocol",
@@ -418,6 +419,8 @@ dependencies = [
 [package.dev-dependencies]
 dev = [
     { name = "aiosqlite" },
+    { name = "euvox-agent-protocol" },
+    { name = "euvox-agent-service" },
     { name = "euvox-control-api" },
     { name = "euvox-evaluation-service" },
     { name = "euvox-mod-builder-service" },
@@ -450,6 +453,8 @@ requires-dist = [
 [package.metadata.requires-dev]
 dev = [
     { name = "aiosqlite", specifier = ">=0.20" },
+    { name = "euvox-agent-protocol", editable = "packages/agent_protocol" },
+    { name = "euvox-agent-service", editable = "apps/agent_service" },
     { name = "euvox-control-api", editable = "apps/control_api" },
     { name = "euvox-evaluation-service", editable = "apps/evaluation_service" },
     { name = "euvox-mod-builder-service", editable = "apps/mod_builder_service" },
@@ -467,22 +472,33 @@ dev = [
 ]
 
 [[package]]
+name = "euvox-agent-protocol"
+version = "0.1.0"
+source = { editable = "packages/agent_protocol" }
+dependencies = [
+    { name = "pydantic" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "pydantic", specifier = ">=2.0" }]
+
+[[package]]
 name = "euvox-agent-service"
 version = "0.1.0"
 source = { editable = "apps/agent_service" }
 dependencies = [
+    { name = "euvox-agent-protocol" },
     { name = "euvox-common-schemas" },
     { name = "euvox-core" },
-    { name = "httpx" },
     { name = "pydantic-settings" },
     { name = "structlog" },
 ]
 
 [package.metadata]
 requires-dist = [
+    { name = "euvox-agent-protocol", editable = "packages/agent_protocol" },
     { name = "euvox-common-schemas", editable = "packages/common_schemas" },
     { name = "euvox-core", editable = "packages/core" },
-    { name = "httpx", specifier = ">=0.27" },
     { name = "pydantic-settings", specifier = ">=2.6" },
     { name = "structlog", specifier = ">=24.4" },
 ]

@@ -1,3 +1,4 @@
+from euvox.core.repositories.agent_review import AgentReviewRepository
 from euvox.core.repositories.client import ClientRepository
 from euvox.core.repositories.evaluation import EvaluationRepository
 from euvox.core.repositories.experiment import ExperimentRepository
@@ -8,6 +9,7 @@ from euvox.core.repositories.simulation_job import SimulationJobRepository
 from euvox.core.repositories.surrogate_sample import SurrogateSampleRepository
 
 __all__ = [
+    "AgentReviewRepository",
     "ClientRepository",
     "EvaluationRepository",
     "ExperimentRepository",
